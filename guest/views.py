@@ -35,7 +35,7 @@ class FeedbackViewSet(viewsets.ModelViewSet):
 
 class FeedbackStatsView(APIView):
 
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     
     class FeedbackStatsFilter(filters.FilterSet):
         start_date = filters.DateFilter()
