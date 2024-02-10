@@ -151,16 +151,7 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ],
-    "DEFAULT_RENDERER_CLASSES": (
-        # "core.utils.renders.CustomJsonRender",
-        # "djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer",
-    ),
-    "DEFAULT_PARSER_CLASSES": (
-        # "djangorestframework_camel_case.parser.CamelCaseFormParser",
-        # "djangorestframework_camel_case.parser.CamelCaseMultiPartParser",
-        # "djangorestframework_camel_case.parser.CamelCaseJSONParser",
-    ),
-    # "EXCEPTION_HANDLER": "core.utils.exception_handler.custom_exception_handler",
+   
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
 }
