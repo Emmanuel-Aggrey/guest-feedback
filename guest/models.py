@@ -39,7 +39,7 @@ class Guest(BaseModel):
 
 
 class Feedback(BaseModel):
-    comment = models.ForeignKey(Comment ,on_delete=models.PROTECT)
+    comment = models.ForeignKey(Comment,on_delete=models.PROTECT)
     guest = models.ForeignKey(Guest, on_delete=models.PROTECT)
     excellent = models.BooleanField(default=False)
     good = models.BooleanField(default=False)
