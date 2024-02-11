@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from guest.models import Guest,Feedback
-from guest.serializers import GuestSerializer,FeedbackSerializer
+from guest.models import Guest, Feedback
+from guest.serializers import GuestSerializer, FeedbackSerializer
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
-from django.db.models import Count,Sum,Q,F
+from django.db.models import Count, Sum, Q, F
 from rest_framework.response import Response
 from rest_framework import status
 from django_filters import rest_framework as filters
@@ -30,21 +30,17 @@ class FeedbackViewSet(viewsets.ModelViewSet):
     filterset_fields = ['comment', 'excellent', 'good', 'fair', 'poor',]
 
 
-
-
-
 class FeedbackStatsView(APIView):
 
     permission_classes = [IsAuthenticated]
-    
+
     class FeedbackStatsFilter(filters.FilterSet):
         start_date = filters.DateFilter()
-        
+
         end_date = filters.DateFilter()
 
     filter_backends = [DjangoFilterBackend]
     filterset_class = FeedbackStatsFilter
-    
 
     def get(self, request):
         start_date = request.GET.get("start_date")
@@ -58,17 +54,17 @@ class FeedbackStatsView(APIView):
             )
             total_feedback = feedback_queryset.count()
 
-        stats = self.get_stats(start_date, end_date)
+        feedback = self.get_stats(start_date, end_date)
 
-        stats["total_feedback"] = total_feedback
-        
+        feedback["total_feedback"] = total_feedback
+
         feedback_stats = self.get_guest_feedback_stats(start_date, end_date)
-        comment_feedback_stats = self.get_comment_feedback_stats(start_date,end_date)
-        
+        comment_feedback_stats = self.get_comment_feedback_stats(start_date, end_date)
+
         data = {
-            "stats" : stats,
-            "feedback_stats" : feedback_stats,
-            "comment_feedback_stats" : comment_feedback_stats
+            "feedback": feedback,
+            "feedback_stats": feedback_stats,
+            "comment_feedback_stats": comment_feedback_stats
         }
 
         return Response(data, status=status.HTTP_200_OK)
@@ -107,10 +103,8 @@ class FeedbackStatsView(APIView):
         }
 
         return stats
-    
-    
-    
-    def get_guest_feedback_stats(self ,start_date=None, end_date=None):
+
+    def get_guest_feedback_stats(self, start_date=None, end_date=None):
         filters = {}
         if start_date and end_date:
             filters["created_at__date__range"] = [start_date, end_date]
@@ -144,8 +138,8 @@ class FeedbackStatsView(APIView):
             "satisfaction_per_guest": list(satisfaction_per_guest),
             "total_feedback_count": total_feedback_count
         }
-        
-    def get_comment_feedback_stats(self,start_date=None, end_date=None):
+
+    def get_comment_feedback_stats(self, start_date=None, end_date=None):
         filters = {}
         if start_date and end_date:
             filters["created_at__date__range"] = [start_date, end_date]
