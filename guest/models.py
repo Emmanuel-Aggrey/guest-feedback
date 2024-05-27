@@ -59,4 +59,4 @@ class Feedback(BaseModel):
 
 class Attachment(models.Model):
     feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE)
-    attachment = models.ImageField(upload_to='feedbacks')
+    attachment = models.FileField(upload_to='feedbacks', max_length=500)

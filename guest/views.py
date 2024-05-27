@@ -60,15 +60,14 @@ class FeedbackStatsView(APIView):
             )
             total_feedback = feedback_queryset.count()
 
-        stats = self.get_stats(start_date, end_date)
+        feedback = self.get_stats(start_date, end_date)
 
-        stats["total_feedback"] = total_feedback
+        feedback["total_feedback"] = total_feedback
 
         feedback_stats = self.get_guest_feedback_stats(start_date, end_date)
         comment_feedback_stats = self.get_comment_feedback_stats(start_date, end_date)
 
         data = {
-            "stats": stats,
             "feedback_stats": feedback_stats,
             "comment_feedback_stats": comment_feedback_stats
         }

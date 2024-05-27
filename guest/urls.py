@@ -9,7 +9,6 @@ app_name = "guest"
 router.register("guest", views.GuestViewSet, "guest")
 
 
-
 router.register("feedback", views.FeedbackViewSet, "feedback")
 
 

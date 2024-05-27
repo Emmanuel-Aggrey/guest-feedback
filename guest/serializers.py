@@ -63,3 +63,8 @@ class FeedbackSerializer(serializers.ModelSerializer):
         model = Feedback
         exclude = ["updated_at", 'created_at']
         read_only_fields = ["id"]
+
+    extra_kwargs = {
+        "comment": {"write_only": True},
+        "guest": {"write_only": True},
+    }
