@@ -12,6 +12,6 @@ from outlets.models import Comment, Outlet
 
 
 class OutletViewSet(generics.ListAPIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = Outlet.objects.all()
     serializer_class = OutletSerializer

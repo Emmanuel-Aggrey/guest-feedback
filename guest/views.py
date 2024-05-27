@@ -15,7 +15,7 @@ from rest_framework.views import APIView
 
 
 class GuestViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = Guest.objects.order_by("-updated_at")
     serializer_class = GuestSerializer
     filter_backends = [DjangoFilterBackend]
@@ -23,7 +23,7 @@ class GuestViewSet(viewsets.ModelViewSet):
 
 
 class AttachmentViewSet(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = Attachment.objects.order_by('id')
     serializer_class = AttachmentSerializer
 
