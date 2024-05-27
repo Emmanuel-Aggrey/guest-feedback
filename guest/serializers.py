@@ -21,6 +21,7 @@ class AttachmentSerializer(serializers.ModelSerializer):
 class FeedbackSerializer(serializers.ModelSerializer):
     comment_obj = CommentSerializer(source='comment', read_only=True)
     guest_obj = GuestSerializer(source='guest', read_only=True)
+    guest_obj = GuestSerializer(source='guest', read_only=True)
     attachments_obj = AttachmentSerializer(source='attachment_set', read_only=True, many=True)
     attachments = serializers.ListField(
         write_only=True,
@@ -62,3 +63,8 @@ class FeedbackSerializer(serializers.ModelSerializer):
         model = Feedback
         exclude = ["updated_at", 'created_at']
         read_only_fields = ["id"]
+
+    extra_kwargs = {
+        "comment": {"write_only": True},
+        "guest": {"write_only": True},
+    }
