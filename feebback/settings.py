@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "import_export",
     "django_filters",
+    "django_extensions",
+
 
     # LOCAL APPSs
     "base",

@@ -1,2 +1,8 @@
 *.pyc
 __pycache__/*.pyc
+db.sqlite3
+db.sqlite3
+media
+/media
+*.mp3
+*.mp4

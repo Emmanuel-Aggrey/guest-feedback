@@ -1,11 +1,10 @@
 from django.db import models
 from base.models import BaseModel
-from  outlets.models import Comment
+from outlets.models import Comment
 from django.contrib.auth import get_user_model
 # Create your models here.
 
 from django.core.exceptions import ValidationError
-
 
 
 class Guest(BaseModel):
@@ -32,14 +31,13 @@ class Guest(BaseModel):
     company = models.CharField(max_length=200, null=True, blank=True)
     head_about_us = models.CharField(
         max_length=200, null=True, blank=True, choices=HEAD_ABOUT.CHOICES)
-    
+
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'
 
 
-
 class Feedback(BaseModel):
-    comment = models.ForeignKey(Comment ,on_delete=models.PROTECT)
+    comment = models.ForeignKey(Comment, on_delete=models.PROTECT)
     guest = models.ForeignKey(Guest, on_delete=models.PROTECT)
     excellent = models.BooleanField(default=False)
     good = models.BooleanField(default=False)
@@ -47,11 +45,9 @@ class Feedback(BaseModel):
     poor = models.BooleanField(default=False)
     staff_to_recommend = models.CharField(max_length=200, null=True, blank=True)
     comments = models.TextField(blank=True)
-    
+
     def __str__(self) -> str:
-        return  self.comment.name
-
-
+        return self.comment.name
 
     def clean(self):
         fields = [self.excellent, self.good, self.fair, self.poor]
@@ -59,3 +55,8 @@ class Feedback(BaseModel):
             raise ValidationError(
                 "Only one of excellent, good, fair, or poor can be true at a time"
             )
+
+
+class Attachment(models.Model):
+    feedback = models.ForeignKey(Feedback, on_delete=models.CASCADE)
+    attachment = models.FileField(upload_to='feedbacks', max_length=500)
